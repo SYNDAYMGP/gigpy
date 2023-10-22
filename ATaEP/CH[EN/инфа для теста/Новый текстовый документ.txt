@@ -1,1 +1,9 @@
+bot3660_Bot
+bot3660
+TG TOKEN = Use this token to access the HTTP API:
+6786106072:AAGz8bE4mNyJscUDrvARjYiXOCAyX5FukD4
 
+
+
+
+API = 
