@@ -50,6 +50,50 @@ _____________________________________________________
 _____________________________________________________
 _____________________________________________________
 
+import logging
+from pathlib import Path
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+
+# Устанавливаем уровень логирования
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+
+
+def start_command(update: Update, context) -> None:
+    """Обрабатывает команду /start и отвечает пользователю."""
+    update.message.reply_text('Привет! Отправь мне сообщение, чтобы получить пустую презентацию в формате PDF.')
+
+
+def send_presentation(update: Update, context) -> None:
+    """Отправляет пустую презентацию в формате PDF пользователю."""
+    presentation_path = Path("empty_presentation.pdf")
+    context.bot.send_document(chat_id=update.effective_chat.id, document=open(presentation_path, 'rb'))
+
+
+def main() -> None:
+    """Основная функция бота."""
+    # Получаем токен от BotFather и инициализируем объект бота
+    updater = Updater(token='YOUR_BOT_TOKEN', use_context=True)
+
+    # Получаем диспетчер для регистрации обработчиков
+    dp = updater.dispatcher
+
+    # Регистрируем обработчик команды /start
+    dp.add_handler(CommandHandler("start", start_command))
+
+    # Регистрируем обработчик всех остальных сообщений
+    dp.add_handler(MessageHandler(Filters.text, send_presentation))
+
+    # Запускаем бота
+    updater.start_polling()
+
+    # Ждем завершения работы с ботом
+    updater.idle()
+
+
+if __name__ == '__main__':
+    main()
 
 
 
