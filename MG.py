@@ -9,7 +9,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Ваш токен API бота
-TOKEN = 'YOUR_BOT_TOKEN'
+TOKEN = '6786106072:AAGz8bE4mNyJscUDrvARjYiXOCAyX5FukD4'
 
 
 def handle_message(update, context):
