@@ -20,7 +20,6 @@ bot.polling(none_stop=True, interval=0)
 @@@@
 ///принемает текстовое сообщение пользователя, сохраняет его в txt файл при помощи раскадировки utf-8, 
 отправляет текстовое сообщение пользователю обратно.
-
 import telebot
 bot = telebot.TeleBot('6786106072:AAGz8bE4mNyJscUDrvARjYiXOCAyX5FukD4')
 @bot.message_handler(commands=["start"])
