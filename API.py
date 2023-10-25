@@ -22,3 +22,37 @@ print("Ответ сохранен в файле 2.txt")
 @@@
 @@@
 @@@
+const Telegraf = require("telegraf")
+const Openai = require("openai")
+const telegramToken = ""
+const openaiKey = ""
+const bot = new Telegraf.Telegraf(telegramToken)
+const configuration = new Openai.Configuration({
+    apiKey: openaiKey
+})
+const openai = new Openai.OpenAIApi(configuration)
+bot.on("text", async (ctx) => {
+    const chatResponse = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [{role: "user", content: ctx.message.text}]
+    })
+    ctx.reply(chatResponse.data.choices[0].message.content)
+})
+bot.launch()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
