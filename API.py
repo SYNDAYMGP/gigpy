@@ -17,11 +17,13 @@ response = generate_response(question)
 with open("2.txt", "w", encoding="utf-8") as file:
     file.write(response)
 print("Ответ сохранен в файле 2.txt")
+
 @@@
 @@@
 @@@
 @@@
 @@@
+
 const Telegraf = require("telegraf")
 const Openai = require("openai")
 const telegramToken = ""
@@ -39,6 +41,22 @@ bot.on("text", async (ctx) => {
     ctx.reply(chatResponse.data.choices[0].message.content)
 })
 bot.launch()
+
+@@@
+@@@
+@@@
+@@@
+@@@
+
+import g4f
+# streamed completion
+response = g4f.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "Hello"}],
+    stream=True,
+)
+for message in response:
+    print(message, flush=True, end='')
 
 
 
