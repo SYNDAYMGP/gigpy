@@ -23,24 +23,14 @@ print("Ответ сохранен в файле 2.txt")
 @@@
 @@@
 @@@
-
-const Telegraf = require("telegraf")
-const Openai = require("openai")
-const telegramToken = ""
-const openaiKey = ""
-const bot = new Telegraf.Telegraf(telegramToken)
-const configuration = new Openai.Configuration({
-    apiKey: openaiKey
-})
-const openai = new Openai.OpenAIApi(configuration)
-bot.on("text", async (ctx) => {
-    const chatResponse = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        messages: [{role: "user", content: ctx.message.text}]
-    })
-    ctx.reply(chatResponse.data.choices[0].message.content)
-})
-bot.launch()
+сохраняем информацию из файла которая находится между 1 и 2 и записываем в переменную
+with open('1.txt', 'r', encoding='utf-8') as file:
+  text = file.read()
+start = text.find('1') + 1
+end = text.find('2')
+extracted_text = text[start:end].strip()
+ww = extracted_text
+print(ww)
 
 @@@
 @@@
