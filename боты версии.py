@@ -61,7 +61,7 @@ bot.polling(none_stop=True, interval=0)
 @@@@
 @@@@
 @@@@
-///принемает текстовое сообщение пользователя, обрабатывает его через gp и ответ gp отсылает 
+/// принемает текстовое сообщение пользователя, обрабатывает его через gp и ответ gp отсылает 
 обратно пользователю в виде txt файла.
 import g4f
 import telebot
@@ -78,9 +78,10 @@ def handle_text(message):
   )
   for msg in response:
     with open('1.txt', 'a', encoding='utf-8') as file:
-      file.write(msg + '\n')
+      file.write(msg)
   bot.send_document(message.chat.id, open('1.txt', 'rb'))
 bot.polling(none_stop=True, interval=0)
+
 
 
 
