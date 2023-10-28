@@ -1,3 +1,9 @@
+фул количество символов в подзоголовке = 1850
+
+
+
+
+
 from pptx import Presentation
 from pptx.util import Pt
 root = Presentation()
