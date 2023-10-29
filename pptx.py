@@ -129,3 +129,26 @@ def handle_text(message):
   bot.send_document(message.chat.id, open('Example.pptx', 'rb'))
 bot.polling(none_stop=True, interval=0)
 
+
+
+
+
+
+
+
+
+#деление текта пополам 
+def get_half_words(filename):
+    with open(filename, 'r') as file:
+        content = file.read()
+        words = content.split()
+        half_length = len(words) // 2
+        half_words = " ".join(words[:half_length])
+        half_words2 = " ".join(words[half_length:])
+        return half_words, half_words2
+
+file_name = '121.txt'
+half_words, half_words2 = get_half_words(file_name)
+print(half_words)
+print(half_words2)
+
