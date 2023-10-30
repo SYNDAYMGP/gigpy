@@ -152,3 +152,24 @@ half_words, half_words2 = get_half_words(file_name)
 print(half_words)
 print(half_words2)
 
+
+
+#считаем кол глав и записываем в переменную
+with open("1.txt", encoding='utf-8') as file:
+  content = file.read()
+  lines = content.split("\n")
+  chapter_count = 0
+  for line in lines:
+    if line:
+      if line[0].isdigit():
+        chapter_count += 1
+        chapter_variable_name = "ww" + str(chapter_count)
+        exec(chapter_variable_name + ' = line')
+  print("Количество глав:", chapter_count)
+  for i in range(1, chapter_count + 1):
+    chapter_variable_name = "ww" + str(i)
+    # Убираем .decode()
+    print(chapter_variable_name + ":", eval(chapter_variable_name))
+    
+    
+
