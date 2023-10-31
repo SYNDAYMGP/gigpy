@@ -122,7 +122,60 @@ def handle_text(message):
   bot.send_message(message.chat.id, ll2)
     
 bot.polling(none_stop=True, interval=0)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+#
+
+import g4f
+import telebot
+from pptx import Presentation
+from pptx.util import Pt
+bot = telebot.TeleBot('6786106072:AAGz8bE4mNyJscUDrvARjYiXOCAyX5FukD4')
+@bot.message_handler(content_types=["text"]) 
+#обработка сообщ => в главы
+def handle_text(message):
+  with open('1.txt', 'w') as file:
+    file.write('')
+  text = message.text
+  response = g4f.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": 'составь мне план (структуру) для моего доклада на тему (' + text + ') план должен состоять из глав в ответ ты должен записать только название глав без каких либо твоих пояснений и дополнений , не забудь пронумеровать их вот так 1, 2, 3, 4, 5'}],
+    stream=True    
+  )
+  ll2 = ""
+  for item in response:
+    ll2 += item
+  with open("1.txt", "w", encoding='utf-8') as file:
+    file.write(ll2)
+      
+  #записываем каждую главу в переменную
+  with open("1.txt", encoding='utf-8') as file:
+    content = file.read()
+    lines = content.split("\n")
+    chapter_count = 0
+    for line in lines:
+      if line:
+        if line[0].isdigit():
+          chapter_count += 1
+          chapter_variable_name = "ww" + str(chapter_count)
+          exec(chapter_variable_name + ' = line')
+    print("Количество глав:", chapter_count)
+    for i in range(1, chapter_count + 1):
+      chapter_variable_name = "ww" + str(i)
+      # Убираем .decode()
+      print(chapter_variable_name + ":", eval(chapter_variable_name))
+        
+bot.polling(none_stop=True, interval=0)
 
 
 
