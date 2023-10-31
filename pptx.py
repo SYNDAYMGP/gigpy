@@ -130,13 +130,13 @@ def handle_text(message):
 bot.polling(none_stop=True, interval=0)
 
 
-
-
-
-
-
-
-
+/////////
+/////////
+/////////
+/////////
+/////////
+/////////
+/////////
 #деление текта пополам 
 def get_half_words(filename):
     with open(filename, 'r') as file:
@@ -151,9 +151,9 @@ file_name = '121.txt'
 half_words, half_words2 = get_half_words(file_name)
 print(half_words)
 print(half_words2)
-
-
-
+///////////
+///////////
+///////////
 #считаем кол глав и записываем в переменную
 with open("1.txt", encoding='utf-8') as file:
   content = file.read()
