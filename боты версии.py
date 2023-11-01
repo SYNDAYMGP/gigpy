@@ -119,7 +119,7 @@ def handle_text(message):
   p.font.size = Pt(14) 
   p.font.name = 'Times New Roman'
   root.save('Example.pptx')
-  bot.send_message(message.chat.id, ll2)
+  bot.send_document(message.chat.id, open('Example.pptx', 'rb'))
     
 bot.polling(none_stop=True, interval=0)
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
