@@ -196,3 +196,43 @@ bot.polling(none_stop=True, interval=0)
 
 
 
+
+
+# обработка ошибок в ваш код
+import g4f
+import telebot
+from pptx import Presentation
+from pptx.util import Pt
+response = None
+ll2 = ""
+text = "человек паук"
+while response is None:  # Запустить код заново, если ответ от GPT-3.5 Turbo не получен
+    try:
+        response = g4f.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": 'составь мне план (структуру) для моего доклада на тему (' + text + ') план должен состоять из глав в ответ ты должен записать только название глав без каких либо твоих пояснений и дополнений , не забудь пронумеровать их вот так 1, 2, 3, 4, 5'}],
+            stream=True    
+        )
+
+        for item in response:
+            ll2 += item
+        
+    except Exception as e:
+        print("Произошла ошибка:", e)
+        response = None  # Сбросить значение response для повторной попытки получить ответ
+print('1')
+print('2')
+print('3')
+print('4')
+print('5')
+print(ll2)
+
+
+
+
+
+
+
+
+
+
