@@ -7,7 +7,7 @@ from pptx import Presentation
 from pptx.util import Pt
 from pptx.dml.color import RGBColor
 import time
-openai.api_key = "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"
+openai.api_key = "АЛЁ ВВЕДИ АПИ"
 model_engine = "text-davinci-003"
 text = 'Халк'
 
