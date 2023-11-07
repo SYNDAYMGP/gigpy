@@ -323,7 +323,166 @@ def handle_text(message):
     print("Содержимое переменных записано в файл 1.txt с использованием кодировки UTF-8")
     bot.send_document(message.chat.id, open('1.txt', 'rb'))
 bot.polling(none_stop=True, interval=0)
+░░░░░░░░▄▄░░░░░░▄▄▄▄▄▄▄░░░░░░░░░░░░░
+░░░░░░░███▄░▄███▄░░░░░▀▀█▄░░░░░░░░░░
+░░░░░░███▀█▄█▀░░▀░░░░█▀▀▀██░░░▄▄░░░░
+░░░░░░░▀▀▀███▄██▄░░░░░▄▄░░█▄▄██▀█░░░
+░░░░░░░░░░▄▀░▀▀██▀▀▀▄████░▀▀█▄███░░░
+░░░░░░░░░▄█░░░░▀▄░░▄██░░░░░█▀░░░░░░░
+░░░░░░░░░█░▄░▀░░░▀▀▀░▀░▄░░░█░░░░░░░░
+░░░░▄█▀▄▄█░░▄▄▄▄▄▄▄▄▄░░▀▀░░█▄░░░░░░░
+▄▄██▀▄▀███░░░█▀████████▀░░░█▄░░░░░░░
+▀▀█▀█░▄███▄░░░▀███████░░░░░███▄▄░░▄▄
+░░█░░░██░██░░░▀▀███▀▀░░░░░░░░█░▀▀▀██
+░██░░░██░░█▄░░░░░░░░░░░░░░░░░█░░░░█░
+░█▀░░░█▀█░░██░░░░░░░░▄▄█▀░░░▄█░░░▄█░
+░▀░░░░█▄▀█░░▀██▄▄▄▄█▀▀░░░░░▄██░█░█░░
+░░░░░░░█▄░▀▄▄░░░░░░░░░░░▄▄▀▄█░░█░█░░
+░░░░░░░░█▄░░▀▀▀███▄███▀▀░░▄▀░░░▀▄█░░
+░░░░░░░░░▀█▄░░░░░░░░░░▄▄█▀░░░░░░█░░░
+░░░░░░░░░████▄░░░░▄██▀▀░░░░░░░░░░░░░
+░░░░░░░░░░░▀▀███▀▀███▀░░░░░░░░░░░░░░
+
+# обработка ошибок в ваш ко
+import telebot
+from docx import Document
+import g4f
+import time
+bot = telebot.TeleBot('6786106072:AAGz8bE4mNyJscUDrvARjYiXOCAyX5FukD4')
+@bot.message_handler(content_types=["text"]) 
+def handle_text(message):
+    bot.send_message(message.chat.id, 'Идёт генерация дождитесь ответа............')
+    with open('1.txt', 'w') as file:
+        file.write('')
+    response = None
+    ll2 = ""
+    text = message.text
+    while response is None:
+        try:
+            response = g4f.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": "составь мне план (структуру) для моего доклада на тему (" + text + ") план должен состоять из глав в ответ ты должен записать только название глав без каких либо твоих пояснений и дополнений , не забудь пронумеровать их вот так 1, 2, 3, 4, 5 ,к тому же твой ответ не должен содержать ни каких Source то есть не должен указывать источники и ссылки" }],
+                stream=True    
+            )
+            ll2 = "".join(response)
+        except Exception as e:
+            print("Произошла ошибка:", e)
+            response = None  # Сбросить значение response для повторной попытки получить ответ
+    print(ll2)
+    time.sleep(80)
+
+
+
+    ll3 = ""
+    response = None
+    while response is None or (response and 'Hm' in ll3):  # Запустить код заново, если ответ от GPT-3.5 Turbo не получен
+        try:
+            response = g4f.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": "(вот тема доклада (" + text + ") ,а вот план доклада состоящий из глав (" + ll2 + ") . Твоя задача написать первую главу данной темы. Твой ответ должен полностью раскрывать смысл главы , к тому же твой ответ не должен содержать ни каких Source то есть не должен указывать источники и ссылки" }],
+                stream=True    
+            )
+            for item in response:
+                ll3 += item
+        except Exception as e:
+            print("Произошла ошибка:", e)
+            response = None  # Сбросить значение response для повторной попытки получить ответ
+    print(ll3)
+    time.sleep(80)
     
+
+    
+    ll4 = ""
+    response = None
+    while response is None or (response and 'Hm' in ll4):  # Запустить код заново, если ответ от GPT-3.5 Turbo не получен
+        try:
+            response = g4f.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": " Иван, вот тема доклада: " + text + ". А вот план доклада, состоящий из следующих глав: " + ll2 + ". Напиши, пожалуйста, полный текст второй главы, раскрывающий ее смысл и не содержащий ссылок и источников." }],
+                stream=True    
+            )
+            for item in response:
+                ll4 += item
+        except Exception as e:
+            print("Произошла ошибка:", e)
+            response = None  # Сбросить значение response для повторной попытки получить ответ
+    print(ll4)
+    time.sleep(80)
+    
+    
+
+    ll5 = ""
+    response = None
+    while response is None or (response and 'Hm' in ll5):  # Запустить код заново, если ответ от GPT-3.5 Turbo не получен
+        try:
+            response = g4f.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": "(вот тема доклада (" + text + ") ,а вот план доклада состоящий из глав (" + ll2 + ") . Твоя задача написать третью главу данной темы. Твой ответ должен полностью раскрывать смысл главы , к тому же твой ответ не должен содержать ни каких Source то есть не должен указывать источники и ссылки" }],
+                stream=True    
+            )
+
+            for item in response:
+                ll5 += item
+        except Exception as e:
+            print("Произошла ошибка:", e)
+            response = None  # Сбросить значение response для повторной попытки получить ответ
+    print(ll5)
+    time.sleep(80)
+    
+    
+    
+    ll6 = ""
+    response = None
+    while response is None or (response and 'Hm' in ll6):  # Запустить код заново, если ответ от GPT-3.5 Turbo не получен
+        try:
+            response = g4f.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": " Иван, вот тема доклада: " + text + ". А вот план доклада, состоящий из следующих глав: " + ll2 + ". Напиши, пожалуйста, полный текст четвёртой главы, раскрывающий ее смысл и не содержащий ссылок и источников." }],
+                stream=True    
+            )
+            for item in response:
+                ll6 += item
+        except Exception as e:
+            print("Произошла ошибка:", e)
+            response = None  # Сбросить значение response для повторной попытки получить ответ
+    print(ll6)
+    time.sleep(80)
+  
+    ll7 = ""
+    response = None
+    while response is None or (response and 'Hm' in ll7):  # Запустить код заново, если ответ от GPT-3.5 Turbo не получен
+        try:
+            response = g4f.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": " Иван, вот тема доклада: " + text + ". А вот план доклада, состоящий из следующих глав: " + ll2 + ". Напиши, пожалуйста, полный текст пятой главы, раскрывающий ее смысл и не содержащий ссылок и источников." }],
+                stream=True    
+            )
+            for item in response:
+                ll7 += item
+        except Exception as e:
+            print("Произошла ошибка:", e)
+            response = None  # Сбросить значение response для повторной попытки получить ответ
+    print(ll7)
+    time.sleep(80)
+
+    # Список переменных для записи в файл
+    variables_to_write = [ll2, ll3, ll4, ll5, ll6, ll7]
+    # Открываем файл для записи с кодировкой UTF-8
+    with open('1.txt', 'w', encoding='utf-8') as file:
+        for i, variable in enumerate(variables_to_write):
+            # Записываем содержимое переменной
+            file.write(variable)
+
+            # Добавляем пустую строку после каждой переменной, кроме последней
+            if i < len(variables_to_write) - 1:
+                file.write('\n\n\n')
+    print("Содержимое переменных записано в файл 1.txt с использованием кодировки UTF-8")
+    bot.send_document(message.chat.id, open('1.txt', 'rb'))
+    bot.send_message(message.chat.id, 'Следующая генерация будет доступна через 5 мин')
+bot.polling(none_stop=True, interval=0)
+    
+    
+
     
 
 
