@@ -70,6 +70,24 @@ print(ll4)
 
 
 
+ll4q1 = ""
+prompt = "напиши очень кратко что нужно раскрыть, написать в данной части реферата (" + ww_vars[3] + ww_vars[4] + ww_vars[5] + ") этого реферата (" + text + ") чтобы часть реферата была содержательной напиши только 4 ключевых аспекта"
+response = openai.ChatCompletion.create(
+    model=model_engine,
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": prompt}
+    ]
+)
+if response['choices']:
+    ll4q1 = response['choices'][0]['message']['content']
+print(ll4q1)
+time.sleep(165)
+
+
+
+
+
 
 
 
